@@ -1,4 +1,4 @@
-package com.sparta.lv3project.Lecture;
+package com.sparta.lv3project.entity.Lecture;
 
 public enum LectureCategoryEnum {
     SPRING(Category.SPRING),
