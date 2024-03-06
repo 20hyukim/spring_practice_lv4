@@ -29,4 +29,11 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
+
+    public User(String email, String password, UserRoleEnum role, UserDepartmentEnum department) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.department = department;
+    }
 }
