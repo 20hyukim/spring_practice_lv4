@@ -5,6 +5,7 @@ import com.sparta.lv3project.dto.SignupRequestDto;
 import com.sparta.lv3project.entity.User.User;
 import com.sparta.lv3project.entity.User.UserDepartmentEnum;
 import com.sparta.lv3project.entity.User.UserRoleEnum;
+import com.sparta.lv3project.jwt.JwtUtil;
 import com.sparta.lv3project.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
     private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
@@ -54,6 +57,17 @@ public class UserService {
 
     }
 
-/*    public void login(LoginRequestDto requestDto) {
-    }*/
+
+
+
+
 }
+
+
+
+/*    public String login(LoginRequestDto requestDto) throws Exception {
+        String email = requestDto.getEmail();
+        User user = userRepository.findByEmail(email).get();
+        String token = jwtUtil.createToken(user.getUsername(), user.getRole());
+        return token;
+    }*/

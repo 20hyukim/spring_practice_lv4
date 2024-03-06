@@ -1,5 +1,7 @@
 package com.sparta.lv3project.config;
 
+import com.sparta.lv3project.jwt.JwtAuthenticationFilter;
+import com.sparta.lv3project.jwt.JwtAuthorizationFilter;
 import com.sparta.lv3project.jwt.JwtUtil;
 import com.sparta.lv3project.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -13,10 +15,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalAuthentication
 public class WebSecurityConfig {
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
@@ -33,6 +35,18 @@ public class WebSecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
+    @Bean//이것도 그림에 있는 아이. bean 으로 만들어주려고 이렇게 하는거. 새로 modifiy 해서 기능 만드는 거니까 bean도 수동으로 만들어줘야함.
+    public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
+        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtUtil); //this.util = util로 만들고... logininpage보이도록 반환해주는
+        filter.setAuthenticationManager(authenticationManager(authenticationConfiguration)); // authenticationmanager도 그림에 있음.
+        return filter;//filter.setAuthenticationManager은 인자로 authenticationManager를 필요로 함. authenticationmanager은 authenticaitonconfiguration을 필요로 함. 이는 위에서 선언되어 있음. 사용 가느,.
+    }
+
+    @Bean
+    public JwtAuthorizationFilter jwtAuthorizationFilter() {
+        return new JwtAuthorizationFilter(jwtUtil, userDetailsService);
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable());
@@ -45,6 +59,9 @@ public class WebSecurityConfig {
                 .requestMatchers("/api/user/**").permitAll()
                 .anyRequest().authenticated()
         );
+
+        http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

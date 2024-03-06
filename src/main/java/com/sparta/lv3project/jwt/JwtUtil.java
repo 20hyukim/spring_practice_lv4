@@ -29,7 +29,7 @@ public class JwtUtil {
     public static final String AUTHORIZATION_KEY = "auth";
     public static final String BEARER_PREFIX = "Bearer";
 
-    private final long TOKEN_TIME = 60*60*1000L;
+    private final long TOKEN_TIME = 60*60*10000000000000L;
 
     @Value("${jwt.secret.key}")
     private String secretKey;
@@ -61,11 +61,13 @@ public class JwtUtil {
 
     public void addJwtToCookie(String token, HttpServletResponse res) {
         try {
-            token = URLEncoder.encode(token, "utf-8").replace("\\+", "%20");
-            Cookie cookie = new Cookie(AUTHORIZATION_HEADER, token);
+            token = URLEncoder.encode(token, "utf-8").replaceAll("\\+", "%20"); // Cookie Value 에는 공백이 불가능해서 encoding 진행
+
+            Cookie cookie = new Cookie(AUTHORIZATION_HEADER, token); // Name-Value // create Token에서 생성한 token이랑, 인식 느낌의 키 넣어줌.
             cookie.setPath("/");
 
-            res.addCookie(cookie);
+            // Response 객체에 Cookie 추가
+            res.addCookie(cookie); //반환되는 곳인 res에다가 값 저장
         } catch (UnsupportedEncodingException e) {
             logger.error(e.getMessage());
         }
