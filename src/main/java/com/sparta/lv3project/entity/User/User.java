@@ -1,6 +1,7 @@
 package com.sparta.lv3project.entity.User;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
+
+    @Column
+    private String username;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -30,7 +34,8 @@ public class User {
     private UserRoleEnum role;
 
 
-    public User(String email, String password, UserRoleEnum role, UserDepartmentEnum department) {
+    public User(String username, String email, String password, UserRoleEnum role, UserDepartmentEnum department) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;

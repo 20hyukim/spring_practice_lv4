@@ -10,6 +10,10 @@ public enum UserRoleEnum {
     UserRoleEnum(String role) {
         this.role = role;
     }
+    public String getAuthority() {
+        return this.role;
+    }
+
     public String getRole() {
         return this.role;
     }
