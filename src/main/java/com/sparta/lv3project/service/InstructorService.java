@@ -1,5 +1,6 @@
 package com.sparta.lv3project.service;
 
+import com.sparta.lv3project.dto.Instructor.InstructorResponseDto;
 import com.sparta.lv3project.dto.Instructor.InstructorSignupRequestDto;
 import com.sparta.lv3project.dto.Instructor.InstructorUpdateRequestDto;
 import com.sparta.lv3project.dto.Lecture.LectureResponseDto;
@@ -58,7 +59,8 @@ public class InstructorService {
 
     public ResponseEntity<?> viewInstructor(Long id) {
         Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강사를 찾을 수 없습니다."));
-        return ResponseEntity.ok(instructor);
+        InstructorResponseDto responseDto = new InstructorResponseDto(instructor);
+        return ResponseEntity.ok(responseDto);
     }
 
     public List<LectureResponseDto> selectedInstructorLectures(String name) {
