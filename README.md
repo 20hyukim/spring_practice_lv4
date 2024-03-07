@@ -1,5 +1,34 @@
 <h1> 강사, 강의 가입 페이지 </h1>
 <h3> 기능 </h3>
+<br><br>
+<img width="777" alt="Screenshot 2024-03-07 at 4 58 15 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/385ddb28-db27-4207-90b6-c39248b2fdd4">
+
+<pre>
+ 우선 use case diagram 을 만들었다.
+  크게 3 부분으로 나뉜다. 
+  1. signin과 로그인 을 담당하는 부분
+  2. 강사를 다루는 부분
+  3. 강의를 다루는 부분
+</pre>
+<br><br>
+<img width="792" alt="Screenshot 2024-03-07 at 6 09 16 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/739c7d1c-178b-4f41-8881-d8161ccbe459">
+<br><br>
+<pre>
+  UserRoleEnum으로 관리자를 부여할지 하지 않을지 결정하였다.
+  이후 이를 중심으로 
+  @PreAuthorize("hasAuthority('Role_MANAGER'))를 통해 access 여부를 결정해 주었다.
+처음에 WebSecurityConfig에 @EnableGlobalMethodSecurity(prePostEnabled = true)를 해주지 않아서 적용이 안되기도 하였다.
+  이를 잊지 말고 적용해주어야 한다.
+  처음에는 연관관계를 user와 instructor를 지어주었지만, 제시된 기능들을 읽다보니, 권한만 가진다면 instructor를 형성할 수 있다고 생각하였다.
+  즉,관리자가 instructor 본인이지 않아도, 다른 강사들을 추가할 수 있다고 생각하여서, 연관관계를 끊었다.
+</pre>
+
+<img width="1317" alt="Screenshot 2024-03-07 at 6 07 39 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/c8f50204-5068-4d53-8917-ac0a972300e3">
+<pre>
+  다음으로 API 명세서를 작성해 주었다. 
+</pre>
+
+<br>
 <pre>
   
  - [ ]  관리자 가입 기능
@@ -69,33 +98,5 @@
         - MANAGER  권한을 가진 관리자만 강사 삭제가 가능합니다.
 - [ ]  Spring Security를 적용하여 인증/인가를 구현합니다.
     - Security의 Secured 기능을 사용하여 권한별로 API를 제어할 수 있습니다.
-<br><br>
 </pre>
-<img width="777" alt="Screenshot 2024-03-07 at 4 58 15 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/385ddb28-db27-4207-90b6-c39248b2fdd4">
-
-<pre>
- 우선 use case diagram 을 만들었다.
-  크게 3 부분으로 나뉜다. 
-  1. signin과 로그인 을 담당하는 부분
-  2. 강사를 다루는 부분
-  3. 강의를 다루는 부분
-</pre>
-<br><br>
-<img width="792" alt="Screenshot 2024-03-07 at 6 09 16 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/739c7d1c-178b-4f41-8881-d8161ccbe459">
-
-<pre>
-  UserRoleEnum으로 관리자를 부여할지 하지 않을지 결정하였다.
-  이후 이를 중심으로 
-  @PreAuthorize("hasAuthority('Role_MANAGER'))를 통해 access 여부를 결정해 주었다.
-처음에 WebSecurityConfig에 @EnableGlobalMethodSecurity(prePostEnabled = true)를 해주지 않아서 적용이 안되기도 하였다.
-  이를 잊지 말고 적용해주어야 한다.
-  처음에는 연관관계를 user와 instructor를 지어주었지만, 제시된 기능들을 읽다보니, 권한만 가진다면 instructor를 형성할 수 있다고 생각하였다.
-  즉,관리자가 instructor 본인이지 않아도, 다른 강사들을 추가할 수 있다고 생각하여서, 연관관계를 끊었다.
-</pre>
-
-<img width="1317" alt="Screenshot 2024-03-07 at 6 07 39 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/c8f50204-5068-4d53-8917-ac0a972300e3">
-<pre>
-  다음으로 API 명세서를 작성해 주었다. 
-</pre>
-
 
