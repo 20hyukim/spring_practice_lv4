@@ -1,7 +1,9 @@
 package com.sparta.lv3project.service;
 
+import com.sparta.lv3project.dto.Instructor.InstructorResponseDto;
 import com.sparta.lv3project.dto.Instructor.InstructorSignupRequestDto;
 import com.sparta.lv3project.dto.Instructor.InstructorUpdateRequestDto;
+import com.sparta.lv3project.dto.Lecture.LectureResponseDto;
 import com.sparta.lv3project.dto.Lecture.LectureSignupRequestDto;
 import com.sparta.lv3project.dto.Lecture.LectureUpdateRequestDto;
 import com.sparta.lv3project.entity.Instructor.Instructor;
@@ -37,6 +39,8 @@ public class LectureService {
 
     public ResponseEntity<?> viewLecture(Long id) {
         Lecture lecture = lectureRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강의를 찾을 수 없습니다."));
-        return ResponseEntity.ok(lecture);
+        LectureResponseDto responseDto = new LectureResponseDto(lecture);
+        return ResponseEntity.ok(responseDto);
+
     }
 }
