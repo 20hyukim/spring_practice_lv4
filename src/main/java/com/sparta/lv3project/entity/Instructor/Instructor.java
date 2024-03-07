@@ -34,15 +34,6 @@ public class Instructor {
     private String intro;
 
 
-/*    public Instructor(InstructorSignupRequestDto requestDto, User user) {
-        //this.userId = user.getUserId();
-        this.name = requestDto.getName();
-        this.year = requestDto.getYear();
-        this.company = requestDto.getCompany();
-        this.tel = requestDto.getTel();
-        this.intro = requestDto.getIntro();
-    }*/
-
     public Instructor(InstructorSignupRequestDto requestDto) {
         this.name = requestDto.getName();
         this.year = requestDto.getYear();
