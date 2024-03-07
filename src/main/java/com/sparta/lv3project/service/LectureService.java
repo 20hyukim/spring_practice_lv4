@@ -8,11 +8,16 @@ import com.sparta.lv3project.dto.Lecture.LectureSignupRequestDto;
 import com.sparta.lv3project.dto.Lecture.LectureUpdateRequestDto;
 import com.sparta.lv3project.entity.Instructor.Instructor;
 import com.sparta.lv3project.entity.Lecture.Lecture;
+import com.sparta.lv3project.entity.Lecture.LectureCategoryEnum;
 import com.sparta.lv3project.repository.LectureRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LectureService {
@@ -42,5 +47,13 @@ public class LectureService {
         LectureResponseDto responseDto = new LectureResponseDto(lecture);
         return ResponseEntity.ok(responseDto);
 
+    }
+
+    public List<LectureResponseDto> viewLectures(LectureCategoryEnum category) {
+        List<Lecture> lectures = lectureRepository.findByCategory(category);
+
+        return lectures.stream()
+                .sorted(Comparator.comparing(Lecture::getRegistrationDate).reversed())
+                .map(LectureResponseDto::new).collect(Collectors.toList());
     }
 }
