@@ -81,7 +81,7 @@
   3. 강의를 다루는 부분
 </pre>
 <br><br>
-<img width="813" alt="Screenshot 2024-03-07 at 5 11 19 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/955a9020-f5b7-42cc-867e-a69399f744f2">
+<img width="792" alt="Screenshot 2024-03-07 at 6 09 16 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/739c7d1c-178b-4f41-8881-d8161ccbe459">
 
 <pre>
   UserRoleEnum으로 관리자를 부여할지 하지 않을지 결정하였다.
@@ -89,6 +89,8 @@
   @PreAuthorize("hasAuthority('Role_MANAGER'))를 통해 access 여부를 결정해 주었다.
 처음에 WebSecurityConfig에 @EnableGlobalMethodSecurity(prePostEnabled = true)를 해주지 않아서 적용이 안되기도 하였다.
   이를 잊지 말고 적용해주어야 한다.
+  처음에는 연관관계를 user와 instructor를 지어주었지만, 제시된 기능들을 읽다보니, 권한만 가진다면 instructor를 형성할 수 있다고 생각하였다.
+  즉,관리자가 instructor 본인이지 않아도, 다른 강사들을 추가할 수 있다고 생각하여서, 연관관계를 끊었다.
 </pre>
 
 <img width="1317" alt="Screenshot 2024-03-07 at 6 07 39 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/c8f50204-5068-4d53-8917-ac0a972300e3">
