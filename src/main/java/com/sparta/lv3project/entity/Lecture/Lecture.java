@@ -29,12 +29,7 @@ public class Lecture extends LectureTimeStamped {
     @Enumerated(value = EnumType.STRING)
     private LectureCategoryEnum category;
 
-    @ManyToOne
-    @JoinColumn(name = "instructor_userId")
-    private Instructor userId;
-
-    @ManyToOne
-    @JoinColumn(name = "instructor_name")
-    private Instructor name;
+    @Column
+    private String username;
 
 }
