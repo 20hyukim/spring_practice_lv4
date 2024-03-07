@@ -38,12 +38,8 @@ public class InstructorService {
 
     @Transactional
     public ResponseEntity<?> signup(InstructorSignupRequestDto requestDto) {
-        User user = userRepository.findByUsername(requestDto.getName()).get();
 
-        if(!user.getRole().equals(UserRoleEnum.MANAGER)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("관리자 권한이 없습니다.");
-        }
-        Instructor instructor = new Instructor(requestDto, user);
+        Instructor instructor = new Instructor(requestDto);
         Instructor savedInstructor = instructorRepository.save(instructor);
         return ResponseEntity.ok(new InstructorSignupRequestDto(savedInstructor));
 
@@ -71,5 +67,11 @@ public class InstructorService {
         return lectures.stream()
                 .sorted(Comparator.comparing(Lecture::getRegistrationDate).reversed())
                 .map(LectureResponseDto::new).collect(Collectors.toList());
+    }
+
+    public ResponseEntity<InstructorResponseDto> deleteInstructor(Long id) {
+        Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강사를 찾을 수 없습니다."));
+        instructorRepository.deleteById(id);
+        return ResponseEntity.ok(new InstructorResponseDto(instructor));
     }
 }

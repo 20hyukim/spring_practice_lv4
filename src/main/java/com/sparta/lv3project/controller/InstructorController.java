@@ -1,5 +1,6 @@
 package com.sparta.lv3project.controller;
 
+import com.sparta.lv3project.dto.Instructor.InstructorResponseDto;
 import com.sparta.lv3project.dto.Instructor.InstructorSignupRequestDto;
 import com.sparta.lv3project.dto.Instructor.InstructorUpdateRequestDto;
 import com.sparta.lv3project.dto.Lecture.LectureResponseDto;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@ControllerAdvice
+@Controller
 @RequestMapping("/api/instructor")
 public class InstructorController {
 
@@ -27,6 +28,7 @@ public class InstructorController {
     }
 
     @PostMapping("/signup")
+    @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     public ResponseEntity<?> signup(@Valid @RequestBody InstructorSignupRequestDto requestDto) {
 
         return instructorService.signup(requestDto);
@@ -51,5 +53,10 @@ public class InstructorController {
         return instructorService.selectedInstructorLectures(name);
     }
 
+    @PutMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ROLE_MANAGER')")
+    public ResponseEntity<InstructorResponseDto> deleteInstructor(@PathVariable Long id){
+        return instructorService.deleteInstructor(id);
+    }
 
 }
