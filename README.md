@@ -80,3 +80,14 @@
   3. 강의를 다루는 부분
 </pre>
 
+<img width="813" alt="Screenshot 2024-03-07 at 5 11 19 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/955a9020-f5b7-42cc-867e-a69399f744f2">
+
+<pre>
+  UserRoleEnum으로 관리자를 부여할지 하지 않을지 결정하였다.
+  이후 이를 중심으로 
+  @PreAuthorize("hasAuthority('Role_MANAGER'))를 통해 access 여부를 결정해 주었다.
+처음에 WebSecurityConfig에 @EnableGlobalMethodSecurity(prePostEnabled = true)를 해주지 않아서 적용이 안되기도 하였다.
+  이를 잊지 말고 적용해주어야 한다.
+</pre>
+
+
