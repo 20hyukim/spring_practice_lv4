@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@ControllerAdvice
+@Controller
 @RequestMapping("/api/lecture")
 public class LectureController {
 
@@ -52,6 +52,12 @@ public class LectureController {
     @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     public @ResponseBody List<LectureResponseDto> viewLectures(@PathVariable LectureCategoryEnum category) {
         return lectureService.viewLectures(category);
+    }
+
+    @PutMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ROLE_MANAGER')")
+    public ResponseEntity<LectureResponseDto> deleteLecture(@PathVariable Long id){
+        return lectureService.deleteLecture(id);
     }
 
 

@@ -11,4 +11,5 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
     List<Lecture> findByUsername(String name);
 
     List<Lecture> findByCategory(LectureCategoryEnum category);
+
 }

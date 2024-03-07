@@ -56,4 +56,11 @@ public class LectureService {
                 .sorted(Comparator.comparing(Lecture::getRegistrationDate).reversed())
                 .map(LectureResponseDto::new).collect(Collectors.toList());
     }
+
+    @Transactional
+    public ResponseEntity<LectureResponseDto> deleteLecture(Long id) {
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강의를 찾을 수 없습니다."));
+        lectureRepository.deleteById(id);
+        return ResponseEntity.ok(new LectureResponseDto(lecture));
+    }
 }
