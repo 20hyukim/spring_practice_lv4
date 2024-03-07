@@ -1,11 +1,13 @@
 package com.sparta.lv3project.service;
 
 import com.sparta.lv3project.dto.InstructorSignupRequestDto;
+import com.sparta.lv3project.dto.InstructorUpdateRequestDto;
 import com.sparta.lv3project.entity.Instructor.Instructor;
 import com.sparta.lv3project.entity.User.User;
 import com.sparta.lv3project.entity.User.UserRoleEnum;
 import com.sparta.lv3project.repository.InstructorRepository;
 import com.sparta.lv3project.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,14 @@ public class InstructorService {
         Instructor instructor = new Instructor(requestDto, user);
         Instructor savedInstructor = instructorRepository.save(instructor);
         return ResponseEntity.ok(new InstructorSignupRequestDto(savedInstructor));
+
+    }
+
+    @Transactional
+    public InstructorUpdateRequestDto updateInstructor(Long id, InstructorUpdateRequestDto requestDto) {
+        Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강사를 찾을 수 없습니다."));
+
+        return new InstructorUpdateRequestDto(instructor);
 
     }
 }
