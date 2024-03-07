@@ -30,8 +30,13 @@ public class LectureService {
 
     @Transactional
     public LectureUpdateRequestDto updateLecture(Long id, LectureUpdateRequestDto requestDto) {
-        Lecture lecture = lectureRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강사를 찾을 수 없습니다."));
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강의를 찾을 수 없습니다."));
 
         return new LectureUpdateRequestDto(lecture);
+    }
+
+    public ResponseEntity<?> viewLecture(Long id) {
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강의를 찾을 수 없습니다."));
+        return ResponseEntity.ok(lecture);
     }
 }

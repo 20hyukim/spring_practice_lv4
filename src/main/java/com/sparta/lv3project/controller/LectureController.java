@@ -35,5 +35,11 @@ public class LectureController {
         return ResponseEntity.ok(updatedLectureDto);
     }
 
+    @PutMapping("/view/{id}")
+    @PreAuthorize("hasAuthority('ROLE_MANAGER')")
+    public ResponseEntity<?> viewLecture(@PathVariable Long id) {
+        return lectureService.viewLecture(id);
+    }
+
 
 }
