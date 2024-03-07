@@ -1,5 +1,5 @@
 <h1> 강사, 강의 가입 페이지 </h1>
-
+<h3> Use Case Diagram</h3>
 <br><br>
 <img width="777" alt="Screenshot 2024-03-07 at 4 58 15 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/385ddb28-db27-4207-90b6-c39248b2fdd4">
 
@@ -11,6 +11,7 @@
   3. 강의를 다루는 부분
 </pre>
 <br><br>
+<h3>ERM</h3>
 <img width="792" alt="Screenshot 2024-03-07 at 6 09 16 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/739c7d1c-178b-4f41-8881-d8161ccbe459">
 <br><br>
 <pre>
@@ -22,7 +23,7 @@
   처음에는 연관관계를 user와 instructor를 지어주었지만, 제시된 기능들을 읽다보니, 권한만 가진다면 instructor를 형성할 수 있다고 생각하였다.
   즉,관리자가 instructor 본인이지 않아도, 다른 강사들을 추가할 수 있다고 생각하여서, 연관관계를 끊었다.
 </pre>
-
+<h3>API 명세서</h3>
 <img width="1317" alt="Screenshot 2024-03-07 at 6 07 39 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/c8f50204-5068-4d53-8917-ac0a972300e3">
 <pre>
   다음으로 API 명세서를 작성해 주었다. 
