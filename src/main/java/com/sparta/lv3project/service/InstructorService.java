@@ -45,4 +45,9 @@ public class InstructorService {
         return new InstructorUpdateRequestDto(instructor);
 
     }
+
+    public ResponseEntity<?> viewInstructor(Long id) {
+        Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강사를 찾을 수 없습니다."));
+        return ResponseEntity.ok(instructor);
+    }
 }

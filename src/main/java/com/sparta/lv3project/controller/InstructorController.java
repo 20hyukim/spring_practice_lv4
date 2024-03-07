@@ -2,6 +2,7 @@ package com.sparta.lv3project.controller;
 
 import com.sparta.lv3project.dto.Instructor.InstructorSignupRequestDto;
 import com.sparta.lv3project.dto.Instructor.InstructorUpdateRequestDto;
+import com.sparta.lv3project.entity.Instructor.Instructor;
 import com.sparta.lv3project.service.InstructorService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,12 @@ public class InstructorController {
     public ResponseEntity<InstructorUpdateRequestDto> updateInstructor(@PathVariable Long id, @Valid @RequestBody InstructorUpdateRequestDto requestDto) {
         InstructorUpdateRequestDto updatedInstructorDto = instructorService.updateInstructor(id, requestDto);
         return ResponseEntity.ok(updatedInstructorDto);
+    }
+
+    @PutMapping("/view/{id}")
+    @PreAuthorize("hasAuthority('ROLE_MANAGER')")
+    public ResponseEntity<?> viewInstructor(@PathVariable Long id) {
+        return instructorService.viewInstructor(id);
     }
 
 
