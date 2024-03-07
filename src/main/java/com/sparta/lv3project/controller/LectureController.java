@@ -6,6 +6,7 @@ import com.sparta.lv3project.dto.Lecture.LectureResponseDto;
 import com.sparta.lv3project.dto.Lecture.LectureSignupRequestDto;
 import com.sparta.lv3project.dto.Lecture.LectureUpdateRequestDto;
 import com.sparta.lv3project.dto.User.SignupRequestDto;
+import com.sparta.lv3project.entity.Lecture.Lecture;
 import com.sparta.lv3project.entity.Lecture.LectureCategoryEnum;
 import com.sparta.lv3project.service.LectureService;
 import jakarta.validation.Valid;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@Controller
+@ControllerAdvice
 @RequestMapping("/api/lecture")
 public class LectureController {
 
@@ -43,7 +44,7 @@ public class LectureController {
 
     @PutMapping("/view/{id}")
     @PreAuthorize("hasAuthority('ROLE_MANAGER')")
-    public ResponseEntity<?> viewLecture(@PathVariable Long id) {
+    public ResponseEntity<?> viewLecture(@PathVariable Long id){
         return lectureService.viewLecture(id);
     }
 
