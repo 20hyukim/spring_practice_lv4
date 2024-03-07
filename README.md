@@ -1,5 +1,5 @@
 <h1> 강사, 강의 가입 페이지 </h1>
-<h3> 기능 </h3>
+
 <br><br>
 <img width="777" alt="Screenshot 2024-03-07 at 4 58 15 PM" src="https://github.com/20hyukim/lv3project/assets/80188808/385ddb28-db27-4207-90b6-c39248b2fdd4">
 
@@ -29,6 +29,7 @@
 </pre>
 
 <br>
+<h3> 기능 </h3>
 <pre>
   
  - [ ]  관리자 가입 기능
