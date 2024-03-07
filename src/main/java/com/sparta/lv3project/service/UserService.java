@@ -1,7 +1,6 @@
 package com.sparta.lv3project.service;
 
-import com.sparta.lv3project.dto.LoginRequestDto;
-import com.sparta.lv3project.dto.SignupRequestDto;
+import com.sparta.lv3project.dto.User.SignupRequestDto;
 import com.sparta.lv3project.entity.User.User;
 import com.sparta.lv3project.entity.User.UserDepartmentEnum;
 import com.sparta.lv3project.entity.User.UserRoleEnum;

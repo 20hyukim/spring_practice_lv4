@@ -1,7 +1,7 @@
 package com.sparta.lv3project.service;
 
-import com.sparta.lv3project.dto.InstructorSignupRequestDto;
-import com.sparta.lv3project.dto.InstructorUpdateRequestDto;
+import com.sparta.lv3project.dto.Instructor.InstructorSignupRequestDto;
+import com.sparta.lv3project.dto.Instructor.InstructorUpdateRequestDto;
 import com.sparta.lv3project.entity.Instructor.Instructor;
 import com.sparta.lv3project.entity.User.User;
 import com.sparta.lv3project.entity.User.UserRoleEnum;

@@ -1,4 +1,4 @@
-package com.sparta.lv3project.dto;
+package com.sparta.lv3project.dto.User;
 
 import com.sparta.lv3project.entity.User.UserDepartmentEnum;
 import com.sparta.lv3project.entity.User.UserRoleEnum;

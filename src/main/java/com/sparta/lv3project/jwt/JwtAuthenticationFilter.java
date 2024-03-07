@@ -1,7 +1,7 @@
 package com.sparta.lv3project.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.lv3project.dto.LoginRequestDto;
+import com.sparta.lv3project.dto.User.LoginRequestDto;
 import com.sparta.lv3project.entity.User.UserRoleEnum;
 import com.sparta.lv3project.security.UserDetailsImpl;
 import jakarta.servlet.FilterChain;

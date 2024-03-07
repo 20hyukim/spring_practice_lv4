@@ -1,4 +1,4 @@
-package com.sparta.lv3project.dto;
+package com.sparta.lv3project.dto.Instructor;
 
 import com.sparta.lv3project.entity.Instructor.Instructor;
 import lombok.Getter;

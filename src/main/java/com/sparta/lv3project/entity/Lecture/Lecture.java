@@ -1,5 +1,6 @@
 package com.sparta.lv3project.entity.Lecture;
 
+import com.sparta.lv3project.dto.Lecture.LectureSignupRequestDto;
 import com.sparta.lv3project.entity.Instructor.Instructor;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -32,4 +33,11 @@ public class Lecture extends LectureTimeStamped {
     @Column
     private String username;
 
+    public Lecture(LectureSignupRequestDto requestDto) {
+        this.lectureName = requestDto.getLectureName();
+        this.price = requestDto.getPrice();
+        this.intro = requestDto.getIntro();
+        this.category = requestDto.getCategory();
+        this.username = requestDto.getUsername();
+    }
 }

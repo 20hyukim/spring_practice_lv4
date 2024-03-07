@@ -1,8 +1,7 @@
 package com.sparta.lv3project.entity.Instructor;
 
-import com.sparta.lv3project.dto.InstructorSignupRequestDto;
+import com.sparta.lv3project.dto.Instructor.InstructorSignupRequestDto;
 import com.sparta.lv3project.entity.User.User;
-import com.sparta.lv3project.repository.UserRepository;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

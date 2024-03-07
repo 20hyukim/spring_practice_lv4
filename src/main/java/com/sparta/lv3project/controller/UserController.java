@@ -1,16 +1,10 @@
 package com.sparta.lv3project.controller;
 
-import com.sparta.lv3project.dto.LoginRequestDto;
-import com.sparta.lv3project.dto.SignupRequestDto;
+import com.sparta.lv3project.dto.User.SignupRequestDto;
 import com.sparta.lv3project.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -20,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
