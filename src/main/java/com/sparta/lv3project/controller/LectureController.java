@@ -7,11 +7,13 @@ import com.sparta.lv3project.dto.Lecture.LectureUpdateRequestDto;
 import com.sparta.lv3project.dto.User.SignupRequestDto;
 import com.sparta.lv3project.service.LectureService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @Controller
 @RequestMapping("/api/lecture")
 public class LectureController {

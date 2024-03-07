@@ -63,10 +63,3 @@ public class UserService {
 }
 
 
-
-/*    public String login(LoginRequestDto requestDto) throws Exception {
-        String email = requestDto.getEmail();
-        User user = userRepository.findByEmail(email).get();
-        String token = jwtUtil.createToken(user.getUsername(), user.getRole());
-        return token;
-    }*/

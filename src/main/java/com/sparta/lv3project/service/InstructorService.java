@@ -2,26 +2,36 @@ package com.sparta.lv3project.service;
 
 import com.sparta.lv3project.dto.Instructor.InstructorSignupRequestDto;
 import com.sparta.lv3project.dto.Instructor.InstructorUpdateRequestDto;
+import com.sparta.lv3project.dto.Lecture.LectureResponseDto;
 import com.sparta.lv3project.entity.Instructor.Instructor;
+import com.sparta.lv3project.entity.Lecture.Lecture;
 import com.sparta.lv3project.entity.User.User;
 import com.sparta.lv3project.entity.User.UserRoleEnum;
 import com.sparta.lv3project.repository.InstructorRepository;
+import com.sparta.lv3project.repository.LectureRepository;
 import com.sparta.lv3project.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InstructorService {
 
     private final UserRepository userRepository;
     private final InstructorRepository instructorRepository;
+    private final LectureRepository lectureRepository;
 
-    public InstructorService(UserRepository userRepository, InstructorRepository instructorRepository) {
+    public InstructorService(UserRepository userRepository, InstructorRepository instructorRepository, LectureRepository lectureRepository) {
         this.userRepository = userRepository;
         this.instructorRepository = instructorRepository;
+        this.lectureRepository = lectureRepository;
     }
 
 
@@ -49,5 +59,15 @@ public class InstructorService {
     public ResponseEntity<?> viewInstructor(Long id) {
         Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강사를 찾을 수 없습니다."));
         return ResponseEntity.ok(instructor);
+    }
+
+    public List<LectureResponseDto> selectedInstructorLectures(String name) {
+        Object instructor = instructorRepository.findByName(name).orElseThrow(() -> new IllegalArgumentException("해당 강사가 존재하지 않습니다."));
+
+        List<Lecture> lectures = lectureRepository.findByUsername(name);
+
+        return lectures.stream()
+                .sorted(Comparator.comparing(Lecture::getRegistrationDate).reversed())
+                .map(LectureResponseDto::new).collect(Collectors.toList());
     }
 }

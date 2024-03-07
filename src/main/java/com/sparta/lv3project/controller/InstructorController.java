@@ -2,6 +2,7 @@ package com.sparta.lv3project.controller;
 
 import com.sparta.lv3project.dto.Instructor.InstructorSignupRequestDto;
 import com.sparta.lv3project.dto.Instructor.InstructorUpdateRequestDto;
+import com.sparta.lv3project.dto.Lecture.LectureResponseDto;
 import com.sparta.lv3project.entity.Instructor.Instructor;
 import com.sparta.lv3project.service.InstructorService;
 import jakarta.validation.Valid;
@@ -10,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -40,6 +43,12 @@ public class InstructorController {
     @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     public ResponseEntity<?> viewInstructor(@PathVariable Long id) {
         return instructorService.viewInstructor(id);
+    }
+
+    @PutMapping("/selected/{name}")
+    @PreAuthorize("hasAuthority('ROLE_MANAGER')")
+    public @ResponseBody List<LectureResponseDto> selectedInstructorLectures (@PathVariable String name) {
+        return instructorService.selectedInstructorLectures(name);
     }
 
 
