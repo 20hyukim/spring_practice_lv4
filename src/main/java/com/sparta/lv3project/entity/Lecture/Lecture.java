@@ -3,6 +3,7 @@ package com.sparta.lv3project.entity.Lecture;
 import com.sparta.lv3project.dto.Lecture.LectureSignupRequestDto;
 import com.sparta.lv3project.entity.Instructor.Instructor;
 import com.sparta.lv3project.entity.Like.Like;
+import com.sparta.lv3project.entity.comment.Comment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,9 @@ public class Lecture extends LectureTimeStamped {
 
     @OneToMany(mappedBy = "lecture")
     private List<Like> lectureLike = new ArrayList<>();
+
+    @OneToMany(mappedBy = "lecture")
+    private List<Comment> lectureComments = new ArrayList<>();
 
     public Lecture(LectureSignupRequestDto requestDto) {
         this.lectureName = requestDto.getLectureName();

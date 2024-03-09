@@ -1,6 +1,7 @@
 package com.sparta.lv3project.entity.User;
 
 import com.sparta.lv3project.entity.Like.Like;
+import com.sparta.lv3project.entity.comment.Comment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -39,6 +40,9 @@ public class User {
 
     @OneToMany(mappedBy="user")
     private List<Like> userLike = new ArrayList<>();
+
+    @OneToMany(mappedBy="user")
+    private List<Comment> userComments = new ArrayList<>();
 
 
     public User(String username, String email, String password, UserRoleEnum role, UserDepartmentEnum department) {

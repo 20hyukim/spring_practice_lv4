@@ -1,10 +1,13 @@
 package com.sparta.lv3project.dto.Lecture;
 
+import com.sparta.lv3project.dto.comment.CommentResponseDto;
 import com.sparta.lv3project.entity.Lecture.Lecture;
 import com.sparta.lv3project.entity.Lecture.LectureCategoryEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,6 +19,8 @@ public class LectureResponseDto {
     private LectureCategoryEnum category;
     private String username;
     private Long likes;
+    @Setter
+    private List<CommentResponseDto> comments;
 
     public LectureResponseDto(Lecture lecture){
         this.lectureName = lecture.getLectureName();
@@ -23,10 +28,12 @@ public class LectureResponseDto {
         this.intro = lecture.getIntro();
         this.category = lecture.getCategory();
         this.username = lecture.getUsername();
+
     }
 
 
     public void setLikes(long likes) {
         this.likes = likes;
     }
+
 }
