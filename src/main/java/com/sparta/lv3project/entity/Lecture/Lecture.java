@@ -2,10 +2,14 @@ package com.sparta.lv3project.entity.Lecture;
 
 import com.sparta.lv3project.dto.Lecture.LectureSignupRequestDto;
 import com.sparta.lv3project.entity.Instructor.Instructor;
+import com.sparta.lv3project.entity.Like.Like;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,6 +36,9 @@ public class Lecture extends LectureTimeStamped {
 
     @Column
     private String username;
+
+    @OneToMany(mappedBy = "lecture")
+    private List<Like> lectureLike = new ArrayList<>();
 
     public Lecture(LectureSignupRequestDto requestDto) {
         this.lectureName = requestDto.getLectureName();

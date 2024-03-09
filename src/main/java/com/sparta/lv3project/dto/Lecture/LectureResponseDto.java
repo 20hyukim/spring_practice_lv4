@@ -15,6 +15,7 @@ public class LectureResponseDto {
     private String intro;
     private LectureCategoryEnum category;
     private String username;
+    private Long likes;
 
     public LectureResponseDto(Lecture lecture){
         this.lectureName = lecture.getLectureName();
@@ -22,5 +23,10 @@ public class LectureResponseDto {
         this.intro = lecture.getIntro();
         this.category = lecture.getCategory();
         this.username = lecture.getUsername();
+    }
+
+
+    public void setLikes(long likes) {
+        this.likes = likes;
     }
 }

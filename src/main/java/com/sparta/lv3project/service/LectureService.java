@@ -10,6 +10,7 @@ import com.sparta.lv3project.entity.Instructor.Instructor;
 import com.sparta.lv3project.entity.Lecture.Lecture;
 import com.sparta.lv3project.entity.Lecture.LectureCategoryEnum;
 import com.sparta.lv3project.repository.LectureRepository;
+import com.sparta.lv3project.repository.LikeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,11 @@ import java.util.stream.Collectors;
 public class LectureService {
 
     private final LectureRepository lectureRepository;
+    private final LikeRepository likeRepository;
 
-    public LectureService(LectureRepository lectureRepository) {
+    public LectureService(LectureRepository lectureRepository, LikeRepository likeRepository) {
         this.lectureRepository = lectureRepository;
+        this.likeRepository = likeRepository;
     }
 
     public ResponseEntity<?> signup(LectureSignupRequestDto requestDto) {
@@ -45,10 +48,14 @@ public class LectureService {
     public ResponseEntity<?> viewLecture(Long id) {
         Lecture lecture = lectureRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강의를 찾을 수 없습니다."));
         LectureResponseDto responseDto = new LectureResponseDto(lecture);
+        long likes = likeRepository.countByLecture_LectureId(id); //like 추가하기 위해, responseDto에 likes 추가.
+        responseDto.setLikes(likes);
         return ResponseEntity.ok(responseDto);
 
     }
 
+
+    //like를 추가했기에 여기서 에러가 나려나? ??...hmm ******
     public List<LectureResponseDto> viewLectures(LectureCategoryEnum category) {
         List<Lecture> lectures = lectureRepository.findByCategory(category);
 
@@ -63,4 +70,5 @@ public class LectureService {
         lectureRepository.deleteById(id);
         return ResponseEntity.ok(new LectureResponseDto(lecture));
     }
+
 }

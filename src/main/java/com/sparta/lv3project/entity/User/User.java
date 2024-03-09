@@ -1,10 +1,14 @@
 package com.sparta.lv3project.entity.User;
 
+import com.sparta.lv3project.entity.Like.Like;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,6 +36,9 @@ public class User {
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
+
+    @OneToMany(mappedBy="user")
+    private List<Like> userLike = new ArrayList<>();
 
 
     public User(String username, String email, String password, UserRoleEnum role, UserDepartmentEnum department) {
