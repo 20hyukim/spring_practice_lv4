@@ -11,3 +11,4 @@
 
 <br><br>
 <h3> ERD </h3>
+<img width="530" alt="Screenshot 2024-03-10 at 5 15 17 PM" src="https://github.com/20hyukim/lv4project/assets/80188808/66361f0f-b16b-421a-aa77-1151dd2f503a">
