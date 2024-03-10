@@ -8,6 +8,7 @@ import com.sparta.lv3project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public class LikeService {
     private final UserRepository userRepository;
 
 
+    @Transactional
     public ResponseEntity<?> toggleLike(Long lectureId, Long userId) {
         Optional<Like> existingLike = likeRepository.findByLecture_LectureIdAndUser_UserId(lectureId, userId);
 

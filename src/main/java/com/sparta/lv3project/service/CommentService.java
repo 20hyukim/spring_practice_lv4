@@ -35,6 +35,7 @@ public class CommentService {
         return ResponseEntity.ok("댓글이 생성되었습니다.");
     }
 
+    @Transactional
     public ResponseEntity<?> editComment(CommentEditRequestDto requestDto, Long userId) {
         Long commentId = requestDto.getCommentId();
         Optional<Comment> existingComment = commentRepository.findById(commentId);
@@ -54,6 +55,7 @@ public class CommentService {
         return ResponseEntity.ok("댓글이 성공적으로 수정되었습니다.");
     }
 
+    @Transactional
     public ResponseEntity<?> deleteComment(Long commentId, Long userId) {
         Optional<Comment> existingComment = commentRepository.findById(commentId);
 

@@ -12,6 +12,7 @@ import com.sparta.lv3project.repository.InstructorRepository;
 import com.sparta.lv3project.repository.LectureRepository;
 import com.sparta.lv3project.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,18 +25,12 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class InstructorService {
 
     private final UserRepository userRepository;
     private final InstructorRepository instructorRepository;
     private final LectureRepository lectureRepository;
-
-    public InstructorService(UserRepository userRepository, InstructorRepository instructorRepository, LectureRepository lectureRepository) {
-        this.userRepository = userRepository;
-        this.instructorRepository = instructorRepository;
-        this.lectureRepository = lectureRepository;
-    }
-
 
     @Transactional
     public ResponseEntity<?> signup(InstructorSignupRequestDto requestDto) {
@@ -54,12 +49,14 @@ public class InstructorService {
 
     }
 
+    @Transactional(readOnly = true)
     public ResponseEntity<?> viewInstructor(Long id) {
         Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강사를 찾을 수 없습니다."));
         InstructorResponseDto responseDto = new InstructorResponseDto(instructor);
         return ResponseEntity.ok(responseDto);
     }
 
+    @Transactional(readOnly = true)
     public List<LectureResponseDto> selectedInstructorLectures(String name) {
         Object instructor = instructorRepository.findByName(name).orElseThrow(() -> new IllegalArgumentException("해당 강사가 존재하지 않습니다."));
 
@@ -70,6 +67,7 @@ public class InstructorService {
                 .map(LectureResponseDto::new).collect(Collectors.toList());
     }
 
+    @Transactional
     public ResponseEntity<InstructorResponseDto> deleteInstructor(Long id) {
         Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new NoSuchElementException("강사 ID" + id + "를 찾을 수 없습니다."));
 

@@ -34,6 +34,7 @@ public class LectureService {
     private final CommentRepository commentRepository;
 
 
+    @Transactional
     public ResponseEntity<?> signup(LectureSignupRequestDto requestDto) {
 
         Lecture lecture = new Lecture(requestDto);
@@ -48,6 +49,7 @@ public class LectureService {
         return new LectureUpdateRequestDto(lecture);
     }
 
+    @Transactional(readOnly = true)
     public ResponseEntity<?> viewLecture(Long id) {
         Lecture lecture = lectureRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강의를 찾을 수 없습니다."));
         LectureResponseDto responseDto = new LectureResponseDto(lecture);
@@ -66,8 +68,7 @@ public class LectureService {
 
     }
 
-
-    //like를 추가했기에 여기서 에러가 나려나? ??...hmm ******
+    @Transactional(readOnly = true)
     public List<LectureResponseDto> viewLectures(LectureCategoryEnum category) {
         List<Lecture> lectures = lectureRepository.findByCategory(category);
 
