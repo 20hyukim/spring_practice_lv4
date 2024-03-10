@@ -29,39 +29,39 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("/api/lecture")
 @RequiredArgsConstructor
+@RequestMapping("/api/lecture")
 public class LectureController {
 
     private final LectureService lectureService;
 
 
-    @PostMapping("/signup")
+    @PostMapping("/")
     @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     public ResponseEntity<?> signup(@Valid @RequestBody LectureSignupRequestDto requestDto) {
         return lectureService.signup(requestDto);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     public ResponseEntity<LectureUpdateRequestDto> updateLecture(@PathVariable Long id, @Valid @RequestBody LectureUpdateRequestDto requestDto) {
         LectureUpdateRequestDto updatedLectureDto = lectureService.updateLecture(id, requestDto);
         return ResponseEntity.ok(updatedLectureDto);
     }
 
-    @PutMapping("/view/{id}")//get put post delete patch method 알아보기 ******
+    @GetMapping("/{id}")//get put post delete patch method 알아보기 ******
     @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     public ResponseEntity<?> viewLecture(@PathVariable Long id){
         return lectureService.viewLecture(id);
     }
 
-    @PutMapping("/selected/{category}")
+    @GetMapping("/category/{category}")
     @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     public @ResponseBody List<LectureResponseDto> viewLectures(@PathVariable LectureCategoryEnum category) {
         return lectureService.viewLectures(category);
     }
 
-    @PutMapping("/delete/{id}") //행위 x  /{id} restfulAPI http 통신 method. ******
+    @DeleteMapping("/{id}") //행위 x  /{id} restfulAPI http 통신 method. ******
     @PreAuthorize("hasAuthority('ROLE_MANAGER')")
     public ResponseEntity<LectureResponseDto> deleteLecture(@PathVariable Long id){
         return lectureService.deleteLecture(id);
