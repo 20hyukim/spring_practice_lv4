@@ -7,3 +7,7 @@
 
 <br><br>
 <h3>Use Case Diagram</h3>
+<img width="603" alt="Screenshot 2024-03-10 at 5 10 56 PM" src="https://github.com/20hyukim/lv4project/assets/80188808/96dff108-56aa-44cd-9a4f-04d204d5ca95">
+
+<br><br>
+<h3> ERD </h3>
