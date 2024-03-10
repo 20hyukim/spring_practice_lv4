@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -70,7 +71,8 @@ public class InstructorService {
     }
 
     public ResponseEntity<InstructorResponseDto> deleteInstructor(Long id) {
-        Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("강사를 찾을 수 없습니다."));
+        Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new NoSuchElementException("강사 ID" + id + "를 찾을 수 없습니다."));
+
         instructorRepository.deleteById(id);
         return ResponseEntity.ok(new InstructorResponseDto(instructor));
     }
